@@ -1,0 +1,28 @@
+# ====================================================
+# GROFASTO DIGITAL SOLUTION - HOSTINGER .HTACCESS
+# Clean URLs, Security & Performance Configuration
+# ====================================================
+
+Options -Indexes
+RewriteEngine On
+
+# 1. Clean URL Routing for Contact / Lead Page
+# Allows /contact to seamlessly serve contact.php
+RewriteRule ^contact/?$ contact.php [L,QSA]
+
+# 2. Clean URL Routing for Admin
+RewriteRule ^admin/?$ admin/index.php [L,QSA]
+
+# 3. Security: Block Sensitive Files
+<FilesMatch "(database\.sql|\.env|\.log|\.git)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 4. Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
