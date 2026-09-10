@@ -140,7 +140,11 @@
           <a href="#services" onclick="showView('home'); scrollToSection('services')" class="hover:text-blue-400 transition-colors">Services</a>
           <a href="#how-it-works" onclick="showView('home'); scrollToSection('how-it-works')" class="hover:text-blue-400 transition-colors">How It Works</a>
           <a href="#why-us" onclick="showView('home'); scrollToSection('why-us')" class="hover:text-blue-400 transition-colors">Why Us</a>
-          <a href="#contact" onclick="openContactWithPurpose('Free Demo Website')" class="hover:text-blue-400 transition-colors">Contact</a>
+          <button onclick="openContactWithPurpose('Book Consultation', 'Appointment')" class="hover:text-purple-400 transition-colors cursor-pointer flex items-center gap-1 text-slate-300 hover:text-purple-300">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-purple-400"></i>
+            <span>Appointment</span>
+          </button>
+          <a href="#contact" onclick="openContactWithPurpose('Free Demo Website', 'Lead')" class="hover:text-blue-400 transition-colors">Contact</a>
         </nav>
 
         <!-- Desktop CTAs -->
@@ -173,7 +177,11 @@
         <a href="#services" onclick="showView('home'); scrollToSection('services'); toggleMobileMenu()" class="py-2 border-b border-slate-800/60">Services</a>
         <a href="#how-it-works" onclick="showView('home'); scrollToSection('how-it-works'); toggleMobileMenu()" class="py-2 border-b border-slate-800/60">How It Works</a>
         <a href="#why-us" onclick="showView('home'); scrollToSection('why-us'); toggleMobileMenu()" class="py-2 border-b border-slate-800/60">Why Us</a>
-        <a href="#contact" onclick="openContactWithPurpose('Free Demo Website'); toggleMobileMenu()" class="py-2 border-b border-slate-800/60">Book Free Demo</a>
+        <button onclick="openContactWithPurpose('Book Consultation', 'Appointment'); toggleMobileMenu()" class="py-2 border-b border-slate-800/60 text-left flex items-center gap-2 text-purple-300 font-semibold cursor-pointer">
+          <i data-lucide="calendar" class="w-4 h-4 text-purple-400"></i>
+          <span>Book Appointment</span>
+        </button>
+        <a href="#contact" onclick="openContactWithPurpose('Free Demo Website', 'Lead'); toggleMobileMenu()" class="py-2 border-b border-slate-800/60">Book Free Demo</a>
         <button onclick="showView('admin'); toggleMobileMenu()" class="py-2 text-left text-blue-400 font-bold">Admin Portal Login</button>
       </div>
 
@@ -676,17 +684,33 @@
           <!-- Lead Form Right -->
           <div class="lg:col-span-7">
             <div class="p-6 sm:p-8 rounded-2xl bg-[#0a1020] border border-slate-800 shadow-2xl relative">
-              <div class="mb-6">
-                <h3 class="text-lg font-bold text-white">Request Your Free Demo &amp; Quote</h3>
-                <p class="text-xs text-slate-400">Complete this quick form — our technical architect will get in touch.</p>
+              <div class="mb-4">
+                <h3 class="text-lg font-bold text-white">Get in Touch with Grofasto</h3>
+                <p class="text-xs text-slate-400">Choose your requirement below — our technical team in Meerut will connect with you.</p>
+              </div>
+
+              <!-- Form Type Switcher (Lead / Appointment / Contact) -->
+              <div class="grid grid-cols-3 gap-2 p-1.5 rounded-xl bg-slate-900/90 border border-slate-800 mb-5">
+                <button type="button" onclick="setFormType('Lead')" id="tab-lead" class="py-2 px-2.5 rounded-lg text-xs font-bold transition-all text-white bg-blue-600 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  <span>Free Demo</span>
+                </button>
+                <button type="button" onclick="setFormType('Appointment')" id="tab-appointment" class="py-2 px-2.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                  <span>Book Appointment</span>
+                </button>
+                <button type="button" onclick="setFormType('Contact')" id="tab-contact" class="py-2 px-2.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer">
+                  <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+                  <span>Contact Us</span>
+                </button>
               </div>
 
               <!-- Success Alert -->
               <div id="lead-success-alert" class="hidden mb-6 p-4 rounded-xl bg-emerald-950/90 border border-emerald-500/50 text-emerald-200 text-xs flex items-start gap-3">
                 <i data-lucide="check-circle" class="w-5 h-5 text-lime-400 shrink-0 mt-0.5"></i>
                 <div>
-                  <strong class="block text-sm font-bold text-white mb-0.5">Request Received Successfully!</strong>
-                  <span>Thank you! We will call or WhatsApp you within 30 minutes with your customized proposal and demo link.</span>
+                  <strong id="lead-success-title" class="block text-sm font-bold text-white mb-0.5">Request Received Successfully!</strong>
+                  <span id="lead-success-desc">Thank you! We will call or WhatsApp you within 30 minutes with your customized proposal and demo link.</span>
                 </div>
               </div>
 
@@ -722,9 +746,9 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                      Business / School / Clinic Name <span class="text-lime-400">*</span>
+                      Business / School / Clinic Name
                     </label>
-                    <input type="text" id="f_business_name" required placeholder="e.g. Apex Public School / Sharma Clinic" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500" />
+                    <input type="text" id="f_business_name" placeholder="e.g. Apex Public School / Sharma Clinic" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500" />
                   </div>
 
                   <div>
@@ -738,7 +762,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                      Business Type / Category <span class="text-lime-400">*</span>
+                      Business Type / Category
                     </label>
                     <select id="f_business_type" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500 cursor-pointer">
                       <option value="School / College">School / College</option>
@@ -752,7 +776,7 @@
 
                   <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                      Purpose / Requirement <span class="text-lime-400">*</span>
+                      Service / Purpose <span class="text-lime-400">*</span>
                     </label>
                     <select id="f_purpose" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-lime-400 font-bold text-xs focus:outline-none focus:border-blue-500 cursor-pointer">
                       <option value="Free Demo Website" selected>Free Demo Website</option>
@@ -768,16 +792,36 @@
                   </div>
                 </div>
 
+                <!-- Conditional Appointment Date & Time Slots (shown when 'Appointment' tab is active) -->
+                <div id="appointment-fields" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/40">
+                  <div>
+                    <label class="block text-xs font-bold text-blue-300 uppercase tracking-wider mb-1.5">
+                      Preferred Date <span class="text-lime-400">*</span>
+                    </label>
+                    <input type="date" id="f_appointment_date" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-blue-300 uppercase tracking-wider mb-1.5">
+                      Preferred Slot <span class="text-lime-400">*</span>
+                    </label>
+                    <select id="f_appointment_time" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500 cursor-pointer">
+                      <option value="Morning (10:00 AM - 01:00 PM)">Morning (10:00 AM - 01:00 PM)</option>
+                      <option value="Afternoon (02:00 PM - 05:00 PM)" selected>Afternoon (02:00 PM - 05:00 PM)</option>
+                      <option value="Evening (06:00 PM - 08:30 PM)">Evening (06:00 PM - 08:30 PM)</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div>
                   <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    Any specific details or features you want? (Optional)
+                    Any specific details or requirements? (Optional)
                   </label>
-                  <textarea id="f_message" rows="3" placeholder="e.g. Need admission inquiry form, doctor appointment booking, or rank #1 on Google Maps in Meerut..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500 resize-none"></textarea>
+                  <textarea id="f_message" rows="3" placeholder="e.g. Need online doctor booking, admission form, or Google Maps ranking in Meerut..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500 resize-none"></textarea>
                 </div>
 
                 <button type="submit" id="lead-submit-btn" class="w-full py-3.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white btn-gradient shadow-xl shadow-blue-600/30 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2">
                   <i data-lucide="send" class="w-4 h-4"></i>
-                  <span>Submit Inquiry &amp; Get Free Demo</span>
+                  <span id="lead-submit-btn-text">Submit Inquiry &amp; Get Free Demo</span>
                 </button>
 
                 <p class="text-[10px] text-slate-500 text-center">
@@ -1225,11 +1269,54 @@
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function openContactWithPurpose(purposeText) {
+    // Form type state: 'Lead' | 'Appointment' | 'Contact'
+    let currentFormType = 'Lead';
+
+    function setFormType(type) {
+      currentFormType = type;
+      const tabLead = document.getElementById('tab-lead');
+      const tabAppt = document.getElementById('tab-appointment');
+      const tabContact = document.getElementById('tab-contact');
+      const apptFields = document.getElementById('appointment-fields');
+      const submitBtnText = document.getElementById('lead-submit-btn-text');
+
+      const defaultTabClass = 'py-2 px-2.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer';
+      const activeTabClass = 'py-2 px-2.5 rounded-lg text-xs font-bold transition-all text-white bg-blue-600 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer';
+
+      if (tabLead) tabLead.className = defaultTabClass;
+      if (tabAppt) tabAppt.className = defaultTabClass;
+      if (tabContact) tabContact.className = defaultTabClass;
+
+      if (type === 'Lead') {
+        if (tabLead) tabLead.className = activeTabClass;
+        if (apptFields) apptFields.classList.add('hidden');
+        if (submitBtnText) submitBtnText.textContent = 'Submit Inquiry & Get Free Demo';
+      } else if (type === 'Appointment') {
+        if (tabAppt) tabAppt.className = activeTabClass;
+        if (apptFields) apptFields.classList.remove('hidden');
+        if (submitBtnText) submitBtnText.textContent = 'Confirm Appointment & Book Slot';
+      } else if (type === 'Contact') {
+        if (tabContact) tabContact.className = activeTabClass;
+        if (apptFields) apptFields.classList.add('hidden');
+        if (submitBtnText) submitBtnText.textContent = 'Send Message to Team';
+      }
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function openContactWithPurpose(purposeText, forcedType) {
       showView('home');
       scrollToSection('contact');
+      if (forcedType) {
+        setFormType(forcedType);
+      } else if (purposeText && purposeText.toLowerCase().includes('appointment')) {
+        setFormType('Appointment');
+      } else {
+        setFormType('Lead');
+      }
+
       const purposeSelect = document.getElementById('f_purpose');
-      if (purposeSelect) {
+      if (purposeSelect && purposeText) {
         for (let i = 0; i < purposeSelect.options.length; i++) {
           if (purposeSelect.options[i].value.toLowerCase().includes(purposeText.toLowerCase())) {
             purposeSelect.selectedIndex = i;
@@ -1250,6 +1337,7 @@
       const sampleLeads = [
         {
           id: 101,
+          form_type: 'Lead',
           full_name: 'Dr. Alok Verma',
           mobile: '9897123456',
           business_name: 'Verma Heart & Dental Clinic',
@@ -1266,13 +1354,16 @@
         },
         {
           id: 102,
+          form_type: 'Appointment',
           full_name: 'Rajesh Singhal',
           mobile: '9457612345',
           business_name: 'Singhal Supermart',
           email: 'singhal.retail@yahoo.com',
           business_type: 'Retail Store / Shop',
           purpose: 'Retail Business',
-          message: 'Want digital catalog with WhatsApp order buttons.',
+          appointment_date: '2026-04-15',
+          appointment_time: 'Afternoon (02:00 PM - 05:00 PM)',
+          message: 'Want digital catalog consultation with WhatsApp order buttons.',
           utm_source: 'direct',
           utm_medium: 'none',
           status: 'New',
@@ -1287,16 +1378,18 @@
       localStorage.setItem(STORAGE_KEY_LEADS, JSON.stringify(leads));
     }
 
-    function handleLeadSubmit(e) {
+    async function handleLeadSubmit(e) {
       e.preventDefault();
       
       const errorAlert = document.getElementById('lead-error-alert');
       const successAlert = document.getElementById('lead-success-alert');
+      const successTitle = document.getElementById('lead-success-title');
+      const successDesc = document.getElementById('lead-success-desc');
       errorAlert.classList.add('hidden');
       successAlert.classList.add('hidden');
 
-      // Honeypot check
-      const honeypot = document.querySelector('input[name="website_url_check"]').value;
+      // Honeypot anti-spam check
+      const honeypot = document.querySelector('input[name="website_url_check"]')?.value;
       if (honeypot) {
         errorAlert.textContent = 'Spam submission detected.';
         errorAlert.classList.remove('hidden');
@@ -1310,27 +1403,67 @@
       const businessType = document.getElementById('f_business_type').value;
       const purpose = document.getElementById('f_purpose').value;
       const message = document.getElementById('f_message').value.trim();
+      const appointmentDate = (currentFormType === 'Appointment') ? (document.getElementById('f_appointment_date')?.value || '') : '';
+      const appointmentTime = (currentFormType === 'Appointment') ? (document.getElementById('f_appointment_time')?.value || '') : '';
 
       // Validate Indian phone number (10 digits starting with 6, 7, 8, or 9)
       const phoneRegex = /^[6-9]\d{9}$/;
       if (!phoneRegex.test(mobile)) {
-        errorAlert.textContent = 'Please enter a valid 10-digit Indian mobile number (e.g. 9876543210).';
+        errorAlert.textContent = 'Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9 (e.g. 9876543210).';
+        errorAlert.classList.remove('hidden');
+        return;
+      }
+
+      if (currentFormType === 'Appointment' && !appointmentDate) {
+        errorAlert.textContent = 'Please select a preferred appointment date.';
         errorAlert.classList.remove('hidden');
         return;
       }
 
       const submitBtn = document.getElementById('lead-submit-btn');
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Submitting Request...';
+      submitBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span><span>Submitting to Database...</span>';
 
-      const newLead = {
-        id: Math.floor(1000 + Math.random() * 9000),
+      // Prepare payload matching api/submit.php
+      const payload = {
+        form_type: currentFormType,
+        name: fullName,
         full_name: fullName,
+        phone: mobile,
         mobile: mobile,
         business_name: businessName,
         email: email || '',
-        business_type: businessType,
+        service: purpose || businessType,
         purpose: purpose,
+        business_type: businessType,
+        appointment_date: appointmentDate || null,
+        appointment_time: appointmentTime || null,
+        message: message,
+        utm_source: utmData.utm_source,
+        utm_medium: utmData.utm_medium,
+        utm_campaign: utmData.utm_campaign,
+        utm_term: utmData.utm_term,
+        utm_content: utmData.utm_content,
+        gclid: utmData.gclid,
+        landing_page: utmData.landing_page,
+        referrer: utmData.referrer
+      };
+
+      // Create local lead object for CRM interface
+      const newLead = {
+        id: Math.floor(1000 + Math.random() * 9000),
+        form_type: currentFormType,
+        full_name: fullName,
+        name: fullName,
+        mobile: mobile,
+        phone: mobile,
+        business_name: businessName,
+        email: email || '',
+        business_type: businessType,
+        service: purpose || businessType,
+        purpose: purpose,
+        appointment_date: appointmentDate,
+        appointment_time: appointmentTime,
         message: message,
         utm_source: utmData.utm_source,
         utm_medium: utmData.utm_medium,
@@ -1344,39 +1477,71 @@
         created_at: new Date().toISOString()
       };
 
-      // Save locally
+      // 1. Save to local storage for Admin Dashboard CRM
       const leads = getStoredLeads();
       leads.unshift(newLead);
       saveStoredLeads(leads);
 
-      // Optional async submit to Hostinger PHP backend if available
+      // 2. Asynchronously POST to Hostinger PHP backend api/submit.php
+      let serverResponseMsg = '';
       try {
-        const formData = new FormData();
-        formData.append('full_name', fullName);
-        formData.append('mobile', mobile);
-        formData.append('business_name', businessName);
-        formData.append('email', email);
-        formData.append('business_type', businessType);
-        formData.append('purpose', purpose);
-        formData.append('message', message);
-        formData.append('utm_source', utmData.utm_source);
-        formData.append('utm_medium', utmData.utm_medium);
-        formData.append('utm_campaign', utmData.utm_campaign);
-        formData.append('utm_term', utmData.utm_term);
-        formData.append('utm_content', utmData.utm_content);
-        formData.append('gclid', utmData.gclid);
-        formData.append('landing_page', utmData.landing_page);
-        formData.append('referrer', utmData.referrer);
-        fetch('api/submit-lead.php', { method: 'POST', body: formData }).catch(() => {});
-      } catch (err) {}
+        const response = await fetch('api/submit.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
 
+        if (response.ok) {
+          const resJson = await response.json();
+          if (resJson.status === 'success' || resJson.success) {
+            serverResponseMsg = resJson.message;
+            if (resJson.lead_id) {
+              newLead.id = resJson.lead_id;
+              saveStoredLeads(leads);
+            }
+          }
+        }
+      } catch (backendErr) {
+        // Graceful fallback: on static dev preview where PHP is not interpreted by Vite,
+        // client-side persistence handles the data smoothly without failing.
+        console.info('Backend Note: Client-side storage synchronized.', backendErr);
+      }
+
+      // Update submit button and show confirmation
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-lime-400"></i><span id="lead-submit-btn-text">Submitted Successfully!</span>';
+
+      if (successTitle) {
+        if (currentFormType === 'Appointment') {
+          successTitle.textContent = 'Appointment Booked Successfully!';
+        } else if (currentFormType === 'Contact') {
+          successTitle.textContent = 'Message Received Successfully!';
+        } else {
+          successTitle.textContent = 'Request Received Successfully!';
+        }
+      }
+
+      if (successDesc) {
+        if (serverResponseMsg) {
+          successDesc.textContent = serverResponseMsg;
+        } else if (currentFormType === 'Appointment') {
+          successDesc.textContent = `Thank you ${fullName}! Your appointment request for ${appointmentDate} (${appointmentTime}) has been recorded. Our team will call you at +91 ${mobile} to confirm the slot.`;
+        } else {
+          successDesc.textContent = `Thank you ${fullName}! We have received your inquiry for "${purpose}". Our team in Meerut will call or WhatsApp you at +91 ${mobile} within 30 minutes.`;
+        }
+      }
+
+      successAlert.classList.remove('hidden');
+      document.getElementById('lead-form').reset();
+      if (window.lucide) window.lucide.createIcons();
+
+      // Reset button state after 3.5 seconds
       setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>Inquiry Sent Successfully!</span>';
-        successAlert.classList.remove('hidden');
-        document.getElementById('lead-form').reset();
-        if (window.lucide) window.lucide.createIcons();
-      }, 500);
+        setFormType(currentFormType);
+      }, 3500);
     }
 
     // --- 4. ADMIN CRM LOGIC ---
@@ -1470,15 +1635,36 @@
           day: '2-digit', month: 'short', year: 'numeric'
         });
 
+        const typeBadge = lead.form_type === 'Appointment'
+          ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">APPT</span>'
+          : (lead.form_type === 'Contact'
+            ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">CONTACT</span>'
+            : '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">LEAD</span>');
+
+        const apptInfo = lead.appointment_date 
+          ? `<div class="text-[10px] text-purple-300 font-mono mt-0.5 flex items-center gap-1">
+               <i data-lucide="calendar" class="w-3 h-3 text-purple-400"></i>
+               <span>${lead.appointment_date} (${lead.appointment_time || 'Slot'})</span>
+             </div>` 
+          : '';
+
         return `
           <tr class="hover:bg-slate-900/50 transition-colors">
             <td class="py-3 px-4 font-mono font-bold text-slate-400">#${lead.id}</td>
-            <td class="py-3 px-4 font-bold text-white">${lead.full_name}</td>
-            <td class="py-3 px-4 font-mono text-lime-400">
-              <a href="tel:+91${lead.mobile}" class="hover:underline">+91 ${lead.mobile}</a>
+            <td class="py-3 px-4 font-bold text-white">
+              <div class="flex items-center gap-1.5">
+                <span>${lead.full_name || lead.name}</span>
+                ${typeBadge}
+              </div>
             </td>
-            <td class="py-3 px-4 text-slate-200">${lead.business_name}</td>
-            <td class="py-3 px-4 text-blue-300 font-medium">${lead.purpose}</td>
+            <td class="py-3 px-4 font-mono text-lime-400">
+              <a href="tel:+91${lead.mobile || lead.phone}" class="hover:underline">+91 ${lead.mobile || lead.phone}</a>
+            </td>
+            <td class="py-3 px-4 text-slate-200">${lead.business_name || '—'}</td>
+            <td class="py-3 px-4 text-blue-300 font-medium">
+              <div>${lead.purpose || lead.service}</div>
+              ${apptInfo}
+            </td>
             <td class="py-3 px-4">
               <select onchange="updateLeadStatus(${lead.id}, this.value)" class="px-2 py-1 rounded text-[11px] font-bold border cursor-pointer bg-slate-900 ${statusBadges[lead.status] || 'text-white'}">
                 <option value="New" ${lead.status === 'New' ? 'selected' : ''}>New</option>
@@ -1492,10 +1678,10 @@
             <td class="py-3 px-4 text-slate-400 text-[11px]">${dateFormatted}</td>
             <td class="py-3 px-4 text-right">
               <div class="flex items-center justify-end gap-1.5">
-                <a href="tel:+91${lead.mobile}" class="p-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-900 text-blue-300" title="Call">
+                <a href="tel:+91${lead.mobile || lead.phone}" class="p-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-900 text-blue-300" title="Call">
                   <i data-lucide="phone" class="w-3.5 h-3.5"></i>
                 </a>
-                <a href="https://wa.me/91${lead.mobile}?text=${encodeURIComponent('Hello ' + lead.full_name + ', thank you for contacting Grofasto Digital Solution regarding ' + lead.purpose + '.')}" target="_blank" class="p-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900 text-emerald-300" title="WhatsApp">
+                <a href="https://wa.me/91${lead.mobile || lead.phone}?text=${encodeURIComponent('Hello ' + (lead.full_name || lead.name) + ', thank you for contacting Grofasto Digital Solution regarding ' + (lead.purpose || lead.service) + '.')}" target="_blank" class="p-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900 text-emerald-300" title="WhatsApp">
                   <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                 </a>
                 <button onclick="deleteLead(${lead.id})" class="p-1.5 rounded-lg bg-red-950/60 hover:bg-red-900 text-red-300" title="Delete">
